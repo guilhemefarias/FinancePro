@@ -391,16 +391,6 @@
         <!-- Logo sem ícone -->
         <div class="logo-area">
             <span class="logo-text">FinancePro</span>
-            
-            <!-- VERSÃO DESKTOP: mês completo -->
-            <div class="desktop-nav-items">
-                <div id="monthTextDisplay" class="current-month-display">---</div>
-            </div>
-            
-            <!-- VERSÃO MOBILE: apenas texto do mês abreviado (sem ícone) -->
-            <div class="mobile-nav-items">
-                <div id="mobileMonthText" class="mobile-month-text">---</div>
-            </div>
         </div>
 
         <!-- Seletor de mês (direita) -->
@@ -511,8 +501,6 @@
 
         // Elementos
         const monthPicker = document.getElementById('globalMonth');
-        const monthDisplay = document.getElementById('monthTextDisplay');
-        const mobileMonth = document.getElementById('mobileMonthText');
         const tableBody = document.getElementById('tableBody');
         const mobileContainer = document.getElementById('mobileCardsContainer');
         const form = document.getElementById('entryForm');
@@ -562,11 +550,6 @@
         // Refresh UI
         function refreshUI() {
             const filtered = getFiltered();
-            const monthLong = formatMonthYear(monthPicker.value);
-            const monthShort = formatMonthShort(monthPicker.value);
-            
-            monthDisplay.innerText = monthLong;
-            mobileMonth.innerText = monthShort;
 
             let ins = 0, outs = 0;
             filtered.forEach(t => {
