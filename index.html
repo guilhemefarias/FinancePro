@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>FinancePro • Desktop + Mobile Navbar</title>
-    
-    <!-- SF Pro Display -->
+
     <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet">
-    <!-- Material Icons Round -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
-    <!-- Chart.js estável -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
 
     <style>
-        /* === RESET E VARIÁVEIS === */
+        * { 
+            box-sizing: border-box; 
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; 
+            -webkit-font-smoothing: antialiased; 
+        }
         :root {
             --primary: #007AFF;
             --success: #34C759;
@@ -29,20 +30,12 @@
             --card-height: 450px; 
         }
 
-        * { 
-            box-sizing: border-box; 
-            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif; 
-            -webkit-font-smoothing: antialiased; 
-        }
-        
         body { 
             background-color: var(--background); 
             color: #000; 
             margin: 0; 
             padding-top: calc(var(--headbar-height) + 10px); 
         }
-
-        /* --- HEADBAR (FIXO) --- */
         .headbar {
             height: var(--headbar-height);
             background: rgba(255, 255, 255, 0.8);
@@ -58,14 +51,11 @@
             width: 100%; 
             z-index: 1000;
         }
-
-        /* Logo area - sem ícone */
         .logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
         .logo-text {
             font-weight: 800;
             font-size: 20px;
@@ -73,49 +63,20 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
-        /* --- VERSÃO DESKTOP DA NAVBAR --- */
         .desktop-nav-items {
             display: flex;
             align-items: center;
             gap: 12px;
         }
-
-        .current-month-display {
-            font-size: 18px; 
-            font-weight: 700; 
-            color: var(--primary);
-            text-transform: capitalize; 
-            border-left: 1.5px solid var(--border);
-            padding-left: 15px; 
-            margin-left: 15px;
-        }
-
-        /* --- VERSÃO MOBILE DA NAVBAR (sem ícone) --- */
         .mobile-nav-items {
             display: none;
             align-items: center;
         }
-
-        .mobile-month-text {
-            background: rgba(0,122,255,0.1);
-            border-radius: 30px;
-            padding: 6px 14px;
-            color: var(--primary);
-            font-weight: 600;
-            font-size: 14px;
-            border-left: 1.5px solid var(--border);
-            margin-left: 12px;
-        }
-
-        /* --- CONTAINER --- */
         .container { 
             max-width: 1400px; 
             margin: 0 auto; 
             padding: 20px; 
         }
-
-        /* --- SUMMARY ROW (3 cards) --- */
         .summary-row {
             display: grid; 
             grid-template-columns: repeat(3, 1fr);
@@ -141,15 +102,12 @@
             font-weight: 800; 
             margin-top: 5px; 
         }
-
-        /* --- GRID PRINCIPAL (3 COLUNAS) - DESKTOP --- */
         .dashboard-grid {
             display: grid; 
             grid-template-columns: 1fr 1fr 1fr;
             gap: 20px; 
             margin-bottom: 30px;
         }
-
         .card-main {
             background: var(--surface); 
             border-radius: var(--radius-ios);
@@ -160,7 +118,6 @@
             display: flex; 
             flex-direction: column;
         }
-
         .card-title { 
             font-size: 11px; 
             font-weight: 800; 
@@ -171,8 +128,6 @@
             align-items: center; 
             gap: 8px; 
         }
-
-        /* --- FORMULÁRIO --- */
         .input-group { margin-bottom: 12px; }
         .input-group label { 
             display: block; 
@@ -195,7 +150,6 @@
             border-color: var(--primary); 
             background: #fff; 
         }
-
         .btn-primary {
             background: var(--primary); 
             color: white; 
@@ -211,8 +165,6 @@
             gap: 8px; 
             margin-top: auto;
         }
-
-        /* --- TABELA --- */
         .table-card { 
             background: #fff; 
             border-radius: var(--radius-ios); 
@@ -237,7 +189,6 @@
             border-bottom: 0.5px solid var(--border); 
             font-size: 14px; 
         }
-
         .balance-danger { 
             background: var(--danger) !important; 
             color: #fff !important; 
@@ -245,16 +196,14 @@
         .balance-danger .summary-label { 
             color: rgba(255,255,255,0.8); 
         }
-
         .chart-box { 
             flex: 1; 
             position: relative; 
             min-height: 0; 
         }
-
-        /* === RESPONSIVIDADE === */
-
-        /* Tablet: 2 colunas */
+        .mobile-cards {
+            display: none;
+        }
         @media (max-width: 1100px) and (min-width: 721px) {
             .dashboard-grid {
                 grid-template-columns: repeat(2, 1fr) !important;
@@ -267,27 +216,19 @@
                 min-height: 400px;
             }
         }
-
-        /* Celular: 1 coluna + navbar simplificada (sem ícone) */
         @media (max-width: 720px) {
-            /* NAVBAR MOBILE - sem ícone */
             .desktop-nav-items {
                 display: none !important;
             }
-            
             .mobile-nav-items {
                 display: flex !important;
             }
-            
             .headbar {
                 padding: 0 16px;
             }
-            
             .logo-text {
                 font-size: 18px;
             }
-            
-            /* Layout 1 coluna */
             .dashboard-grid {
                 grid-template-columns: 1fr !important;
             }
@@ -308,14 +249,12 @@
                 font-size: 22px;
             }
         }
-
-        /* Celular pequeno: tabela vira cards */
         @media (max-width: 550px) {
             table {
                 display: none;
             }
             .table-card {
-                background: transparent;
+                background: transparent !important;
                 box-shadow: none;
                 padding: 0;
             }
@@ -366,12 +305,6 @@
                 color: var(--danger);
             }
         }
-
-        .mobile-cards {
-            display: none;
-        }
-
-        /* Galaxy A35 */
         @media (max-width: 412px) {
             .btn-primary {
                 padding: 16px;
@@ -388,54 +321,49 @@
 <body>
 
     <header class="headbar">
-        <!-- Logo sem ícone -->
         <div class="logo-area">
             <span class="logo-text">FinancePro</span>
         </div>
 
-        <!-- Seletor de mês (direita) -->
         <div style="display:flex; align-items:center; gap:12px;">
-            <label class="desktop-nav-items" style="font-size: 11px; font-weight: 800; color: var(--system-gray);">IR PARA:</label>
-            <input type="month" id="globalMonth" onchange="refreshUI()" style="border:none; background:rgba(0,122,255,0.1); color:var(--primary); padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer; outline:none;">
+            <span class="desktop-nav-items" style="font-size: 11px; font-weight: 800; color: var(--system-gray);">IR PARA:</span>
+            <input type="month" id="mesSelecionado" style="border:none; background:rgba(0,122,255,0.1); color:var(--primary); padding:8px 12px; border-radius:10px; font-weight:700; cursor:pointer; outline:none;">
         </div>
     </header>
 
     <div class="container">
-        <!-- CARDS DE RESUMO -->
         <div class="summary-row">
             <div class="summary-item">
                 <div class="summary-label">Entradas</div>
-                <div id="resIn" class="summary-val" style="color:var(--success)">R$ 0,00</div>
+                <div id="entradasTotal" class="summary-val" style="color:var(--success)">R$ 0,00</div>
             </div>
             <div class="summary-item">
                 <div class="summary-label">Saídas</div>
-                <div id="resOut" class="summary-val" style="color:var(--danger)">R$ 0,00</div>
+                <div id="saidasTotal" class="summary-val" style="color:var(--danger)">R$ 0,00</div>
             </div>
-            <div class="summary-item" id="balanceCard">
+            <div class="summary-item" id="cartaoSaldo">
                 <div class="summary-label">Saldo Final</div>
-                <div id="resTotal" class="summary-val">R$ 0,00</div>
+                <div id="saldoTotal" class="summary-val">R$ 0,00</div>
             </div>
         </div>
 
-        <!-- GRID 3 COLUNAS -->
         <div class="dashboard-grid">
-            <!-- FORMULÁRIO -->
             <div class="card-main">
                 <div class="card-title"><span class="material-icons-round" style="font-size:16px;">add_circle</span> Novo Lançamento</div>
-                <form id="entryForm" style="flex:1; display:flex; flex-direction:column;">
-                    <input type="hidden" id="editId">
+                <form id="formLancamento" style="flex:1; display:flex; flex-direction:column;">
+                    <input type="hidden" id="idEditando">
                     <div class="input-group">
                         <label>DESCRIÇÃO</label>
-                        <input type="text" id="desc" placeholder="Ex: Salário" required>
+                        <input type="text" id="descricaoInput" placeholder="Ex: Salário" required>
                     </div>
                     <div style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
                         <div class="input-group">
                             <label>VALOR (R$)</label>
-                            <input type="number" id="amount" step="0.01" required placeholder="0,00">
+                            <input type="number" id="valorInput" step="0.01" required placeholder="0,00">
                         </div>
                         <div class="input-group">
                             <label>TIPO</label>
-                            <select id="type">
+                            <select id="tipoSelect">
                                 <option value="out">Despesa</option>
                                 <option value="in">Receita</option>
                             </select>
@@ -443,39 +371,41 @@
                     </div>
                     <div class="input-group">
                         <label>CATEGORIA</label>
-                        <select id="category">
-                            <option>Alimentação</option><option>Transporte</option><option>Moradia</option>
-                            <option>Lazer</option><option>Saúde</option><option>Salário</option><option>Educação</option>
+                        <select id="categoriaSelect">
+                            <option>Alimentação</option>
+                            <option>Transporte</option>
+                            <option>Moradia</option>
+                            <option>Lazer</option>
+                            <option>Saúde</option>
+                            <option>Salário</option>
+                            <option>Educação</option>
                         </select>
                     </div>
                     <div class="input-group">
                         <label>DATA</label>
-                        <input type="date" id="date" required>
+                        <input type="date" id="dataInput" required>
                     </div>
-                    <button type="submit" class="btn-primary" id="btnSave">
+                    <button type="submit" class="btn-primary" id="botaoSalvar">
                         <span class="material-icons-round">bolt</span> Confirmar Lançamento
                     </button>
                 </form>
             </div>
 
-            <!-- GRÁFICO PIZZA -->
             <div class="card-main">
                 <div class="card-title"><span class="material-icons-round" style="font-size:16px;">donut_small</span> Categorias</div>
                 <div class="chart-box">
-                    <canvas id="chartPie"></canvas>
+                    <canvas id="graficoPizza"></canvas>
                 </div>
             </div>
 
-            <!-- GRÁFICO LINHA -->
             <div class="card-main">
                 <div class="card-title"><span class="material-icons-round" style="font-size:16px;">timeline</span> Evolução Diária</div>
                 <div class="chart-box">
-                    <canvas id="chartLine"></canvas>
+                    <canvas id="graficoLinha"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- TABELA + CARDS MOBILE -->
         <div class="table-card">
             <table>
                 <thead>
@@ -487,230 +417,214 @@
                         <th>AÇÕES</th>
                     </tr>
                 </thead>
-                <tbody id="tableBody"></tbody>
+                <tbody id="corpoTabela"></tbody>
             </table>
-            <div id="mobileCardsContainer" class="mobile-cards"></div>
+            <div id="cardsMobile" class="mobile-cards"></div>
         </div>
     </div>
 
-<script>
-    (function() {
-        // DADOS
-        let db = JSON.parse(localStorage.getItem('finance_pro_noicon')) || [];
-        let pie, line;
+    <script>
+        (function() {
+            let listaLancamentos = JSON.parse(localStorage.getItem('financas_simples')) || [];
+            let graficoPizzaObj;
+            let graficoLinhaObj;
 
-        // Elementos
-        const monthPicker = document.getElementById('globalMonth');
-        const tableBody = document.getElementById('tableBody');
-        const mobileContainer = document.getElementById('mobileCardsContainer');
-        const form = document.getElementById('entryForm');
-        const editId = document.getElementById('editId');
-        const desc = document.getElementById('desc');
-        const amount = document.getElementById('amount');
-        const type = document.getElementById('type');
-        const category = document.getElementById('category');
-        const date = document.getElementById('date');
-        const btnSave = document.getElementById('btnSave');
-        const resIn = document.getElementById('resIn');
-        const resOut = document.getElementById('resOut');
-        const resTotal = document.getElementById('resTotal');
-        const balanceCard = document.getElementById('balanceCard');
+            let mesPicker = document.getElementById('mesSelecionado');
+            let corpoTabela = document.getElementById('corpoTabela');
+            let divCards = document.getElementById('cardsMobile');
+            let form = document.getElementById('formLancamento');
+            let idEditando = document.getElementById('idEditando');
+            let descInput = document.getElementById('descricaoInput');
+            let valorInput = document.getElementById('valorInput');
+            let tipoInput = document.getElementById('tipoSelect');
+            let catInput = document.getElementById('categoriaSelect');
+            let dataInput = document.getElementById('dataInput');
+            let botao = document.getElementById('botaoSalvar');
+            let entradasEl = document.getElementById('entradasTotal');
+            let saidasEl = document.getElementById('saidasTotal');
+            let saldoEl = document.getElementById('saldoTotal');
+            let cartaoSaldo = document.getElementById('cartaoSaldo');
 
-        // Inicialização: mês atual
-        function setCurrentMonth() {
-            const today = new Date();
-            const y = today.getFullYear();
-            const m = String(today.getMonth() + 1).padStart(2, '0');
-            monthPicker.value = `${y}-${m}`;
-            date.valueAsDate = today;
-        }
-        setCurrentMonth();
-
-        function formatMonthYear(monthVal) {
-            if (!monthVal) return "---";
-            const [y, m] = monthVal.split('-');
-            const d = new Date(y, m-1);
-            return d.toLocaleDateString('pt-BR', { month: 'long', year: 'numeric' });
-        }
-
-        function formatMonthShort(monthVal) {
-            if (!monthVal) return "---";
-            const [y, m] = monthVal.split('-');
-            const d = new Date(y, m-1);
-            return d.toLocaleDateString('pt-BR', { month: 'short' }).replace('.', '') + '/' + y.slice(-2);
-        }
-
-        // Filtrar por mês
-        function getFiltered() {
-            const selected = monthPicker.value;
-            if (!selected) return [];
-            return db.filter(t => t.date.startsWith(selected));
-        }
-
-        // Refresh UI
-        function refreshUI() {
-            const filtered = getFiltered();
-
-            let ins = 0, outs = 0;
-            filtered.forEach(t => {
-                if (t.type === 'in') ins += t.amount;
-                else outs += t.amount;
-            });
-            const total = ins - outs;
-            resIn.innerText = `R$ ${ins.toFixed(2).replace('.', ',')}`;
-            resOut.innerText = `R$ ${outs.toFixed(2).replace('.', ',')}`;
-            resTotal.innerText = `R$ ${total.toFixed(2).replace('.', ',')}`;
-
-            if (total < 0) balanceCard.classList.add('balance-danger');
-            else balanceCard.classList.remove('balance-danger');
-
-            const sorted = [...filtered].sort((a,b) => new Date(b.date) - new Date(a.date));
-
-            tableBody.innerHTML = sorted.map(t => {
-                const sinal = t.type === 'in' ? '+' : '-';
-                const cor = t.type === 'in' ? 'var(--success)' : '#000';
-                return `<tr>
-                    <td style="color:var(--system-gray); font-size:12px;">${t.date.split('-').reverse().join('/')}</td>
-                    <td><b>${t.desc}</b></td>
-                    <td><span style="background:#F2F2F7; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:700;">${t.category}</span></td>
-                    <td style="font-weight:800; color:${cor};">${sinal} R$ ${t.amount.toFixed(2).replace('.', ',')}</td>
-                    <td>
-                        <button onclick="editItem(${t.id})" style="border:none; background:none; cursor:pointer; color:var(--system-gray);"><span class="material-icons-round" style="font-size:18px">edit</span></button>
-                        <button onclick="deleteItem(${t.id})" style="border:none; background:none; cursor:pointer; color:var(--danger); margin-left:8px;"><span class="material-icons-round" style="font-size:18px">delete</span></button>
-                    </td>
-                </tr>`;
-            }).join('');
-
-            mobileContainer.innerHTML = sorted.map(t => {
-                const sinal = t.type === 'in' ? '+' : '-';
-                const cor = t.type === 'in' ? '#34C759' : '#000';
-                return `<div class="mobile-card-item">
-                    <div class="mobile-row">
-                        <span style="color:var(--system-gray); font-size:13px;">${t.date.split('-').reverse().join('/')}</span>
-                        <div class="mobile-category"><span>${t.category}</span></div>
-                    </div>
-                    <div class="mobile-row" style="font-weight:600; font-size:16px;">${t.desc}</div>
-                    <div class="mobile-row" style="font-weight:800; font-size:18px; color:${cor};">${sinal} R$ ${t.amount.toFixed(2).replace('.', ',')}</div>
-                    <div class="mobile-actions">
-                        <button class="action-btn-mobile" onclick="editItem(${t.id})"><span class="material-icons-round">edit</span></button>
-                        <button class="action-btn-mobile delete-mobile" onclick="deleteItem(${t.id})"><span class="material-icons-round">delete</span></button>
-                    </div>
-                </div>`;
-            }).join('');
-
-            renderCharts(filtered, monthPicker.value);
-        }
-
-        function renderCharts(data, month) {
-            const expenses = data.filter(x => x.type === 'out');
-            const cats = {};
-            expenses.forEach(x => cats[x.category] = (cats[x.category] || 0) + x.amount);
-
-            if (pie) pie.destroy();
-            pie = new Chart(document.getElementById('chartPie'), {
-                type: 'doughnut',
-                data: {
-                    labels: Object.keys(cats),
-                    datasets: [{ data: Object.values(cats), backgroundColor: ['#007AFF','#34C759','#FF3B30','#FF9500','#5856D6','#FFCC00','#AF52DE'], borderWidth: 0 }]
-                },
-                options: { maintainAspectRatio: false, cutout: '78%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, font: {size: 10} } } } }
-            });
-
-            if (!month) return;
-            const [y, mNum] = month.split('-').map(Number);
-            const days = new Date(y, mNum, 0).getDate();
-            const dIn = Array(days).fill(0);
-            const dOut = Array(days).fill(0);
-            data.forEach(x => {
-                const d = parseInt(x.date.split('-')[2]) - 1;
-                if (x.type === 'in') dIn[d] += x.amount; else dOut[d] += x.amount;
-            });
-
-            if (line) line.destroy();
-            line = new Chart(document.getElementById('chartLine'), {
-                type: 'line',
-                data: {
-                    labels: Array.from({length: days}, (_, i) => i + 1),
-                    datasets: [
-                        { label: 'Entradas', data: dIn, borderColor: '#34C759', tension: 0.4, pointRadius: 0, fill: true, backgroundColor: 'rgba(52,199,89,0.05)' },
-                        { label: 'Saídas', data: dOut, borderColor: '#FF3B30', tension: 0.4, pointRadius: 0, fill: true, backgroundColor: 'rgba(255,59,48,0.05)' }
-                    ]
-                },
-                options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
-            });
-        }
-
-        window.editItem = function(id) {
-            const x = db.find(i => i.id === id);
-            if (!x) return;
-            editId.value = x.id;
-            desc.value = x.desc;
-            amount.value = x.amount;
-            type.value = x.type;
-            category.value = x.category;
-            date.value = x.date;
-            btnSave.innerHTML = '<span class="material-icons-round">sync</span> Atualizar Dados';
-            window.scrollTo({top: 0, behavior: 'smooth'});
-        };
-
-        window.deleteItem = function(id) {
-            if(confirm("Deseja realmente excluir este lançamento?")) {
-                db = db.filter(i => i.id !== id);
-                localStorage.setItem('finance_pro_noicon', JSON.stringify(db));
-                refreshUI();
+            function pegarMesAtual() {
+                let hoje = new Date();
+                let ano = hoje.getFullYear();
+                let mes = String(hoje.getMonth() + 1).padStart(2, '0');
+                mesPicker.value = `${ano}-${mes}`;
+                dataInput.valueAsDate = hoje;
             }
-        };
+            pegarMesAtual();
 
-        form.onsubmit = (e) => {
-            e.preventDefault();
-            const id = editId.value;
-            const entry = {
-                id: id ? parseInt(id) : Date.now(),
-                desc: desc.value,
-                amount: parseFloat(amount.value),
-                type: type.value,
-                category: category.value,
-                date: date.value,
-                month: date.value.substring(0, 7)
+            function filtrarPorMes() {
+                let mesEscolhido = mesPicker.value;
+                if (!mesEscolhido) return [];
+                return listaLancamentos.filter(item => item.data.startsWith(mesEscolhido));
+            }
+
+            function atualizarTela() {
+                let filtrados = filtrarPorMes();
+
+                let totalEntradas = 0;
+                let totalSaidas = 0;
+                filtrados.forEach(item => {
+                    if (item.tipo === 'in') totalEntradas += item.valor;
+                    else totalSaidas += item.valor;
+                });
+                let saldo = totalEntradas - totalSaidas;
+
+                entradasEl.innerText = `R$ ${totalEntradas.toFixed(2).replace('.', ',')}`;
+                saidasEl.innerText = `R$ ${totalSaidas.toFixed(2).replace('.', ',')}`;
+                saldoEl.innerText = `R$ ${saldo.toFixed(2).replace('.', ',')}`;
+
+                if (saldo < 0) cartaoSaldo.classList.add('balance-danger');
+                else cartaoSaldo.classList.remove('balance-danger');
+
+                let ordenados = [...filtrados].sort((a, b) => new Date(b.data) - new Date(a.data));
+
+                corpoTabela.innerHTML = ordenados.map(item => {
+                    let sinal = item.tipo === 'in' ? '+' : '-';
+                    let corTexto = item.tipo === 'in' ? 'var(--success)' : '#000';
+                    return `<tr>
+                        <td style="color:var(--system-gray); font-size:12px;">${item.data.split('-').reverse().join('/')}</td>
+                        <td><b>${item.descricao}</b></td>
+                        <td><span style="background:#F2F2F7; padding:4px 8px; border-radius:6px; font-size:11px; font-weight:700;">${item.categoria}</span></td>
+                        <td style="font-weight:800; color:${corTexto};">${sinal} R$ ${item.valor.toFixed(2).replace('.', ',')}</td>
+                        <td>
+                            <button onclick="editarItem(${item.id})" style="border:none; background:none; cursor:pointer; color:var(--system-gray);"><span class="material-icons-round" style="font-size:18px">edit</span></button>
+                            <button onclick="excluirItem(${item.id})" style="border:none; background:none; cursor:pointer; color:var(--danger); margin-left:8px;"><span class="material-icons-round" style="font-size:18px">delete</span></button>
+                        </td>
+                    </tr>`;
+                }).join('');
+
+                divCards.innerHTML = ordenados.map(item => {
+                    let sinal = item.tipo === 'in' ? '+' : '-';
+                    let corTexto = item.tipo === 'in' ? '#34C759' : '#000';
+                    return `<div class="mobile-card-item">
+                        <div class="mobile-row">
+                            <span style="color:var(--system-gray); font-size:13px;">${item.data.split('-').reverse().join('/')}</span>
+                            <div class="mobile-category"><span>${item.categoria}</span></div>
+                        </div>
+                        <div class="mobile-row" style="font-weight:600; font-size:16px;">${item.descricao}</div>
+                        <div class="mobile-row" style="font-weight:800; font-size:18px; color:${corTexto};">${sinal} R$ ${item.valor.toFixed(2).replace('.', ',')}</div>
+                        <div class="mobile-actions">
+                            <button class="action-btn-mobile" onclick="editarItem(${item.id})"><span class="material-icons-round">edit</span></button>
+                            <button class="action-btn-mobile delete-mobile" onclick="excluirItem(${item.id})"><span class="material-icons-round">delete</span></button>
+                        </div>
+                    </div>`;
+                }).join('');
+
+                desenharGraficos(filtrados, mesPicker.value);
+            }
+
+            function desenharGraficos(dados, mesEscolhido) {
+                let despesas = dados.filter(x => x.tipo === 'out');
+                let categorias = {};
+                despesas.forEach(x => categorias[x.categoria] = (categorias[x.categoria] || 0) + x.valor);
+
+                if (graficoPizzaObj) graficoPizzaObj.destroy();
+                graficoPizzaObj = new Chart(document.getElementById('graficoPizza'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: Object.keys(categorias),
+                        datasets: [{ data: Object.values(categorias), backgroundColor: ['#007AFF','#34C759','#FF3B30','#FF9500','#5856D6','#FFCC00','#AF52DE'], borderWidth: 0 }]
+                    },
+                    options: { maintainAspectRatio: false, cutout: '78%', plugins: { legend: { position: 'bottom', labels: { usePointStyle: true, font: {size: 10} } } } }
+                });
+
+                if (!mesEscolhido) return;
+                let [ano, mesNum] = mesEscolhido.split('-').map(Number);
+                let diasNoMes = new Date(ano, mesNum, 0).getDate();
+                let entradasDia = Array(diasNoMes).fill(0);
+                let saidasDia = Array(diasNoMes).fill(0);
+                dados.forEach(item => {
+                    let dia = parseInt(item.data.split('-')[2]) - 1;
+                    if (item.tipo === 'in') entradasDia[dia] += item.valor;
+                    else saidasDia[dia] += item.valor;
+                });
+
+                if (graficoLinhaObj) graficoLinhaObj.destroy();
+                graficoLinhaObj = new Chart(document.getElementById('graficoLinha'), {
+                    type: 'line',
+                    data: {
+                        labels: Array.from({length: diasNoMes}, (_, i) => i + 1),
+                        datasets: [
+                            { label: 'Entradas', data: entradasDia, borderColor: '#34C759', tension: 0.4, pointRadius: 0, fill: true, backgroundColor: 'rgba(52,199,89,0.05)' },
+                            { label: 'Saídas', data: saidasDia, borderColor: '#FF3B30', tension: 0.4, pointRadius: 0, fill: true, backgroundColor: 'rgba(255,59,48,0.05)' }
+                        ]
+                    },
+                    options: { maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { y: { beginAtZero: true } } }
+                });
+            }
+
+            window.editarItem = function(id) {
+                let item = listaLancamentos.find(i => i.id === id);
+                if (!item) return;
+                idEditando.value = item.id;
+                descInput.value = item.descricao;
+                valorInput.value = item.valor;
+                tipoInput.value = item.tipo;
+                catInput.value = item.categoria;
+                dataInput.value = item.data;
+                botao.innerHTML = '<span class="material-icons-round">sync</span> Atualizar Dados';
+                window.scrollTo({top: 0, behavior: 'smooth'});
             };
-            if (id) db = db.map(x => x.id === entry.id ? entry : x);
-            else db.push(entry);
-            localStorage.setItem('finance_pro_noicon', JSON.stringify(db));
-            form.reset();
-            editId.value = '';
-            btnSave.innerHTML = '<span class="material-icons-round">bolt</span> Confirmar Lançamento';
-            date.valueAsDate = new Date();
-            refreshUI();
-        };
 
-        monthPicker.addEventListener('change', refreshUI);
-        refreshUI();
-        window.refreshUI = refreshUI;
-    })();
-</script>
+            window.excluirItem = function(id) {
+                if (confirm("Deseja realmente excluir este lançamento?")) {
+                    listaLancamentos = listaLancamentos.filter(i => i.id !== id);
+                    localStorage.setItem('financas_simples', JSON.stringify(listaLancamentos));
+                    atualizarTela();
+                }
+            };
 
-<style>
-    @media (max-width: 550px) {
-        .table-card {
-            background: transparent !important;
+            form.onsubmit = (e) => {
+                e.preventDefault();
+                let id = idEditando.value;
+                let novoItem = {
+                    id: id ? parseInt(id) : Date.now(),
+                    descricao: descInput.value,
+                    valor: parseFloat(valorInput.value),
+                    tipo: tipoInput.value,
+                    categoria: catInput.value,
+                    data: dataInput.value,
+                };
+
+                if (id) {
+                    listaLancamentos = listaLancamentos.map(x => x.id === novoItem.id ? novoItem : x);
+                } else {
+                    listaLancamentos.push(novoItem);
+                }
+
+                localStorage.setItem('financas_simples', JSON.stringify(listaLancamentos));
+                form.reset();
+                idEditando.value = '';
+                botao.innerHTML = '<span class="material-icons-round">bolt</span> Confirmar Lançamento';
+                dataInput.valueAsDate = new Date();
+                atualizarTela();
+            };
+
+            mesPicker.addEventListener('change', atualizarTela);
+            atualizarTela();
+
+            window.atualizarTela = atualizarTela;
+        })();
+    </script>
+
+    <style>
+        .action-btn-mobile {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            color: var(--system-gray);
+            padding: 8px 12px;
+            border-radius: 40px;
+            font-size: 20px;
         }
-    }
-    .action-btn-mobile {
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        color: var(--system-gray);
-        padding: 8px 12px;
-        border-radius: 40px;
-        font-size: 20px;
-    }
-    .action-btn-mobile:hover {
-        background: #F2F2F7;
-    }
-    .delete-mobile {
-        color: var(--danger);
-    }
-</style>
-
+        .action-btn-mobile:hover {
+            background: #F2F2F7;
+        }
+        .delete-mobile {
+            color: var(--danger);
+        }
+    </style>
 </body>
 </html>
